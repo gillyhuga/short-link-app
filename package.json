@@ -7,9 +7,14 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.7.1",
+    "@prisma/client": "^4.16.1",
+    "@reduxjs/toolkit": "^1.9.5",
+    "axios": "^1.4.0",
     "next": "latest",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.1"
   },
   "devDependencies": {
     "@types/node": "^12.12.21",
