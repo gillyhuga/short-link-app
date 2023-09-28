@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
+import { Container } from '@chakra-ui/react'
 
 type Props = {
   children?: ReactNode
@@ -14,7 +14,10 @@ const Layout = ({ children, title = 'Short URL' }: Props) => (
       <meta charSet="utf-8" />
       <meta name="viewport" content="initial-scale=1.0, width=device-width" />
     </Head>
-    {children}
+    <Container maxW='container.xl'>
+      {children}
+    </Container>
+
   </div>
 )
 
