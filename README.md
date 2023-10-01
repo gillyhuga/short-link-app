@@ -1,47 +1,73 @@
-# TypeScript Next.js example
+<br />
+<p align="center">
+  
+  
+  <h1 align="center">
+  <a href="https://url.gillyhuga.com/">
+    Shorten URL
+  </a>
+  </h1>
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+  <p align="center">
+    Shorten URL is a website that allows users to transform long URLs into shorter, more shareable links.!
+    <br />
+    <a href="https://github.com/gillyhuga/short-link-app"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://url.gillyhuga.com/">View Demo</a>
+    ·
+    <a href="https://github.com/gillyhuga/short-link-app/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/gillyhuga/short-link-app/issues">Request Feature</a>
+  </p>
+</p>
 
-## Deploy your own
+## About The Project
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+<p align="center">
+<img src="https://github-production-user-asset-6210df.s3.amazonaws.com/37680589/271807923-784914c2-7c42-4af0-80d5-f0bf111cbb8a.png"></img>
+</p>
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+### Feature
 
-## How to use it?
+- URL Shortening
+- Customizable Links
+- Stored Database
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+### Built With
 
-```bash
-npx create-next-app --example with-typescript with-typescript-app
-```
+- [Next.js](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [Chakra UI](https://chakra-ui.com/)
+- [Prisma](https://www.prisma.io/)
+- [MongooDB](https://www.mongodb.com/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [Vercel](https://vercel.com/)
 
-```bash
-yarn create next-app --example with-typescript with-typescript-app
-```
+## Getting Started
 
-```bash
-pnpm create next-app --example with-typescript with-typescript-app
-```
+### Prerequisites
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+- [Node >= 16.14.0](https://nodejs.org/en/)
 
-## Notes
+### Installation
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+- Clone repository
+  ```
+     https://github.com/gillyhuga/short-link-app.git
+  ```
+- Go to the project directory
+  ```
+     cd short-link-app
+  ```
+- Install dependencies
 
-```
-npm install --save-dev typescript
-```
+  ```
+     npm install
+  ```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
-
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
-
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
-
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
-
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+- Start the server
+  ```
+     npm start
+  ```
+- Open `http://localhost:3000` with your browser to see the result
