@@ -40,7 +40,7 @@
 - [Typescript](https://www.typescriptlang.org/)
 - [Chakra UI](https://chakra-ui.com/)
 - [Prisma](https://www.prisma.io/)
-- [MongooDB](https://www.mongodb.com/)
+- [MongoDB](https://www.mongodb.com/)
 - [Redux Toolkit](https://redux-toolkit.js.org/)
 - [Vercel](https://vercel.com/)
 
@@ -60,6 +60,14 @@
   ```
      cd short-link-app
   ```
+- Create environment variables
+  ```
+     cp .env.example .env.local
+  ```
+- Set up the environment variables to your .env file
+
+  `DATABASE_URL` contains MongoDB connection URL
+
 - Install dependencies
 
   ```
@@ -68,6 +76,6 @@
 
 - Start the server
   ```
-     npm start
+     npx next dev
   ```
 - Open `http://localhost:3000` with your browser to see the result
