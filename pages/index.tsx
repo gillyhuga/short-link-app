@@ -9,7 +9,7 @@ import Features from '../components/Features';
 import Footer from '../components/Footer';
 
 export default function Home() {
-  const customUrl = useSelector((state: RootState) => state.shortLink.customUrl);
+  const customUrl = useSelector((state: RootState) => state.shortLink.slug);
 
   return (
     <div>
@@ -19,7 +19,6 @@ export default function Home() {
       <Features />
       <QnaAccordion />
       <Footer />
-
     </div>
   );
 }

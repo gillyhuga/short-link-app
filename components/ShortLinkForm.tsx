@@ -7,27 +7,20 @@ import {
   FormLabel,
   Input,
   InputGroup,
-  InputLeftAddon,
-  Link,
-  Flex,
-  Text,
   useClipboard,
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ButtonGroup,
   useMediaQuery,
-  IconButton,
-  HStack,
   Grid,
 } from '@chakra-ui/react';
-import { FaLink, FaCopy } from 'react-icons/fa';
+import { FaLink } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { setCustomUrl, setLoading } from '../store/shortLink';
+import {
+  setSlug,
+  setLoading,
+  setError,
+  setLongUrl,
+} from '../store/shortLink';
+import CustomUrlModal from './CustomUrlModal';
 
 interface ShortLinkFormProps {
   customUrl: string | null;
@@ -35,33 +28,32 @@ interface ShortLinkFormProps {
 
 const ShortLinkForm: React.FC<ShortLinkFormProps> = ({ customUrl }) => {
   const dispatch = useDispatch();
-  const [longUrl, setLongUrl] = useState('');
-  const [slug, setSlug] = useState('');
-  const [error, setError] = useState('');
-  const loading = useSelector((state: RootState) => state.shortLink.loading);
+  const { longUrl, slug, loading, error } = useSelector(
+    (state: RootState) => state.shortLink
+  );
   const { hasCopied, onCopy } = useClipboard(
     customUrl ? `${window.location.origin}/${customUrl}` : ''
   );
   const [showCustomUrlModal, setShowCustomUrlModal] = useState(false);
-  const [isLargerThanMobile] = useMediaQuery("(min-width: 480px)");
+  const [isLargerThanMobile] = useMediaQuery('(min-width: 480px)');
 
   useEffect(() => {
     const origin = window.location.origin;
   }, []);
 
   const handleLongUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLongUrl(e.target.value);
-    setError('');
+    dispatch(setLongUrl(e.target.value));
+    dispatch(setError(null));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    dispatch(setError(null));
     dispatch(setLoading(true));
 
     const urlPattern = /^(https?|http):\/\/[\w.-]+\.[a-zA-Z]{2,}(\/\S*)?$/;
     if (!urlPattern.test(longUrl)) {
-      setError('Invalid URL');
+      dispatch(setError('Invalid URL'));
       dispatch(setLoading(false));
       return;
     }
@@ -77,22 +69,21 @@ const ShortLinkForm: React.FC<ShortLinkFormProps> = ({ customUrl }) => {
 
       if (response.ok) {
         const data = await response.json();
-        dispatch(setCustomUrl(data.slug));
+        dispatch(setSlug(data.slug));
         setShowCustomUrlModal(true);
       } else {
         const errorData = await response.json();
-        setError(errorData.error);
+        dispatch(setError(errorData.error));
       }
     } catch (error) {
-      setError('An error occurred');
+      dispatch(setError('An error occurred'));
     }
-
     dispatch(setLoading(false));
   };
 
   const closeModal = () => {
-    setLongUrl('');
-    setSlug('');
+    dispatch(setLongUrl(''));
+    dispatch(setSlug(''));
     setShowCustomUrlModal(false);
   };
 
@@ -137,7 +128,7 @@ const ShortLinkForm: React.FC<ShortLinkFormProps> = ({ customUrl }) => {
                   id="slug"
                   value={slug}
                   height="3.5rem"
-                  onChange={(e) => setSlug(e.target.value)}
+                  onChange={(e) => dispatch(setSlug(e.target.value))}
                   placeholder="Enter a custom slug (optional)"
                   width="100%"
                   flexShrink="0"
@@ -163,37 +154,14 @@ const ShortLinkForm: React.FC<ShortLinkFormProps> = ({ customUrl }) => {
         </Button>
       </form>
       {customUrl && (
-        <Modal isOpen={showCustomUrlModal} onClose={closeModal} isCentered>
-          <ModalOverlay />
-          <ModalContent >
-            <ModalHeader>✨ Your Link is Ready!</ModalHeader>
-            <ModalCloseButton />
-            <ModalBody>
-
-              <Flex my={4} p={2} rounded={'lg'} bg="gray.100" alignItems="center" justifyContent="space-between">
-                <Box>
-                  <Text fontWeight="bold">Short Link:</Text>
-                  <Link href={customUrl ? `${window.location.origin}/${customUrl}` : '#'}>
-                    {window.location.origin}/{customUrl}
-                  </Link>
-                </Box>
-                {isLargerThanMobile ? (
-                  <Button
-                    leftIcon={<FaCopy />}
-                    size="sm"
-                    colorScheme={hasCopied ? "green" : "teal"}
-                    onClick={onCopy}
-                    variant="outline"
-                  >
-                    {hasCopied ? "Copied!" : "Copy Link"}
-                  </Button>
-                ) : (
-                  <IconButton aria-label='Copy Link' size="sm" variant="outline" onClick={onCopy} colorScheme={hasCopied ? "green" : "teal"} icon={<FaCopy />} />
-                )}
-              </Flex>
-            </ModalBody>
-          </ModalContent>
-        </Modal>
+        <CustomUrlModal
+          isOpen={showCustomUrlModal}
+          onClose={closeModal}
+          customUrl={customUrl}
+          onCopy={onCopy}
+          hasCopied={hasCopied}
+          isLargerThanMobile={isLargerThanMobile}
+        />
       )}
     </Box>
   );

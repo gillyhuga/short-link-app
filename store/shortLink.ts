@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ShortLinkState {
-  customUrl: string;
+  longUrl: string,
+  slug: string;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: ShortLinkState = {
-  customUrl: '',
+  longUrl: '',
+  slug: '',
   loading: false,
   error: null,
 };
@@ -16,8 +18,11 @@ const shortLinkSlice = createSlice({
   name: 'shortLink',
   initialState,
   reducers: {
-    setCustomUrl: (state, action: PayloadAction<string>) => {
-      state.customUrl = action.payload;
+    setLongUrl: (state, action: PayloadAction<string>) => {
+      state.longUrl = action.payload;
+    },
+    setSlug: (state, action: PayloadAction<string>) => {
+      state.slug = action.payload;
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
       state.loading = action.payload;
@@ -28,5 +33,5 @@ const shortLinkSlice = createSlice({
   },
 });
 
-export const { setCustomUrl, setLoading, setError } = shortLinkSlice.actions;
+export const { setLongUrl, setSlug, setLoading, setError } = shortLinkSlice.actions;
 export default shortLinkSlice.reducer;
